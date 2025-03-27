@@ -2,16 +2,20 @@
     --black: #222222;
     --white: #F7F1FF;
     --green: #7BD88F;
-    --red: #FC618D;
+    --red: #f71307;
     --purple: #948AE3;
     --yellow: #FCE566;
     --blue: #5AD4E6;
+    --light: #f8f9fa;
+    --darkgrey: #000c;
+    --
 
     --intense: 2rem;
-    --title: 1.75rem;
+    --title: 1.25rem;
     --sub-title: 1.5rem;
     --section: 1.25rem;
     --content: 1rem;
+    --small: 0.75rem;
 
     --app-width: 800px;
 }
@@ -19,10 +23,11 @@
 @media (min-width:700px) {
     :root {
         --intense: 2.5rem;
-        --title: 2rem;
+        --title: 1.25rem;
         --sub-title: 1.75rem;
         --section: 1.5rem;
         --content: 1.25rem;
+        --small: 1rem;
     }
 }
 
@@ -36,24 +41,16 @@ html[data-theme="light"] {
     font-size: var(--content);
 }
 
-html[data-theme="light"] #theme-toggle::after {
-    content: "Light";
-}
-
-html[data-theme="dark"] #theme-toggle::after {
-    content: "Dark";
-}
-
 @font-face {
-    font-family: "Fira Code";
-    src: url("/static/fonts/FiraCode-Regular.ttf") format("truetype");
+    font-family: "Roboto";
+    src: url("/static/fonts/Roboto-Light.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Fira Code";
-    src: url("/static/fonts/FiraCode-SemiBold.ttf") format("truetype");
+    font-family: "Roboto";
+    src: url("/static/fonts/Roboto-Medium.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
 }

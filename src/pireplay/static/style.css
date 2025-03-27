@@ -1,10 +1,10 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-color: var(--black);
-    font-family: "Fira Code", monospace;
+    background-color: #ffffff;
+    font-family: "Roboto", sans-serif;
     font-size: var(--content);
-    color: var(--white);
+    color: var(--black);
 }
 
 button {
@@ -18,6 +18,7 @@ header, nav {
     align-items: center;
     position: relative;
     font-size: var(--section);
+    color: var(--white);
 }
 
 main {
@@ -29,7 +30,9 @@ main {
 }
 
 header {
-    border-bottom: 3px solid var(--white);
+    height: 40px;
+    border-bottom: 0px solid var(--white);
+    background-color: var(--light);
 }
 
 section {
@@ -69,8 +72,8 @@ span {
 .past-replay {
     display: block;
     text-align: center;
-    margin: 0px;
-    color: var(--purple);
+    margin: 10px;
+    color: var(--black);
 }
 
 .past-replay.selected {
@@ -102,16 +105,17 @@ form.options {
 }
 
 .option {
-    padding: 5px 10px;
-    border: 4px solid var(--yellow);
+    padding: 7px 7px;
+    border: 2px solid var(--darkgrey);
     border-radius: 10px;
-    font-size: var(--sub-title);
-    color: var(--yellow);
+    font-size: var(--section);
+    color: var(--darkgrey);
 }
 
 .option.selected {
-    border-color: var(--blue);
-    color: var(--blue);
+    border-color: var(--red);
+    background-color: var(--red);
+    color: var(--light);
 }
 
 .capture-time span {
@@ -121,6 +125,9 @@ form.options {
 .camera-resolution span {
     width: 12ch;
 }
+#logo {
+    width: 40px;
+}
 
 #github {
     color: var(--green);
@@ -129,26 +136,36 @@ form.options {
 
 #app-title {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 75px;
     font-size: var(--title);
     text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
 }
 
 #settings {
-    color: var(--blue);
-    font-size: var(--section);
+    color: var(--darkgrey);
+    font-size: var(--content);
     margin: 5px 0;
+    text-decoration: none;
 }
 
 #capture {
-    color: var(--red);
-    border: 5px solid var(--red);
-    font-size: var(--intense);
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 30px;
+  background: var(--red);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s, transform 0.1s;
+  text-decoration: none;
+  margin: 30px 0 30px 0;
 }
 
 #delete-replay {
@@ -170,5 +187,118 @@ form.options {
   display: block;
   text-align: center;
   margin: 15px 0 0 0;
-  color: var(--yellow)
+  color: var(--red)
 }
+
+
+/* Replays table */
+
+.replays-table {
+  width: 90%;
+  margin: 1em auto;
+  font-size: var(--content);
+}
+
+.replays-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 0.5em;
+  background: var(--light);
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.replay-row {
+  border-bottom: 1px solid #eee;
+}
+
+.replay-row:hover {
+  background: #f9f9f9;
+}
+
+.replay-row.selected {
+  background: var(--light);
+  font-weight: bold;
+}
+
+.replay-link {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 0.5em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.replay-link:hover {
+  text-decoration: none;
+}
+
+.replay-date {
+  white-space: nowrap;
+  text-align: left;
+  font-weight: 600;
+}
+
+.replay-name {
+  color: var(--black);
+  text-align: left;
+}
+
+.replay-actions {
+  display: flex;
+  gap: 0.25em;
+  justify-content: flex-end;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  color: var(--darkgrey);
+  transition: color 0.2s;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  color: var(--darkgrey);
+  background: var(--light);
+  text-decoration: none;
+}
+
+.icon-button i {
+  font-size: 0.9em;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: var(--small);
+}
+
+footer hr {
+  width: 50%;
+  margin: 1em auto;
+  border: none;
+  border-top: 1px solid var(--darkgrey);
+}
+
+footer p {
+  margin: 0.5em 0;
+}
+
+footer a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--black);
+  text-decoration: underline;
+}
+

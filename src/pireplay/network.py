@@ -1,46 +1,26 @@
 import time
-
-import nmwifi
 from pireplay.config import Config, config
 
-
-# FIXME make this not global
-# global near SSIDs cache
+# Mock network state
 cached_ssids = []
 
 
 def get_ap_ssid():
-    mac = nmwifi.get_mac_address(config(Config.network_interface))
-    mac = mac.replace(":", "")
-    mac_suffix = mac[-4:]
-
-    suffix = "" if config(Config.ap_ssid_no_suffix) else f"-{mac_suffix}"
-
-    return config(Config.ap_ssid_prefix) + suffix
+    """Mock AP SSID for local development"""
+    return "mock-ap"
 
 
 def setup_network():
-    nmwifi.setup(
-        config(Config.network_interface),
-        config(Config.wifi_ssid) or None,
-        config(Config.wifi_password) or None,
-        get_ap_ssid() or None,
-        config(Config.ap_password) or None,
-    )
+    """Mock network setup for local development"""
+    pass
 
 
 def refresh_cached_ssids():
-    nmwifi.clean()
-
-    time.sleep(5) # wait successful disconnect before rescan
-
+    """Mock network refresh for local development"""
     cached_ssids.clear()
-    cached_ssids.extend(
-        nmwifi.available_networks(config(Config.network_interface))
-    )
-
-    setup_network()
+    cached_ssids.extend(["Mock Network 1", "Mock Network 2"])
 
 
 def connected_to():
-    return nmwifi.is_wifi_active() and config(Config.wifi_ssid)
+    """Mock network connection status for local development"""
+    return False

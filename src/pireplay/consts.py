@@ -29,6 +29,9 @@ class Route:
     # DELETE
     delete_replay = "/delete-replay"
     delete_all_replays = "/delete-all-replays"
+    
+    # RENAME
+    rename_replay = "/rename-replay"
 
 
 class Header:
@@ -84,6 +87,7 @@ class Config:
 class Form:
     option_field = "index"
     delete_field = "replay"
+    rename_field = "new_name"
 
     wifi_ssid = "ssid"
     wifi_password = "password"

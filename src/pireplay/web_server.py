@@ -1,5 +1,4 @@
 import functools
-from minify_html import minify
 from flask import (
     Flask,
     render_template,
@@ -10,6 +9,8 @@ from flask import (
     request,
     abort,
 )
+from pathlib import Path
+import os
 
 from pireplay import camera, replays
 from pireplay.consts import (
@@ -43,6 +44,7 @@ def render_replay(replay=None):
         past_replays=replays.get_past_replays(),
         replay=replay,
         delete_field=Form.delete_field,
+        rename_field=Form.rename_field,
     )
 
 
@@ -164,6 +166,25 @@ def delete_all_replays():
     return redirect(url_for(home.__name__))
 
 
+@server.route(Route.rename_replay, methods=["POST"])
+def rename_replay():
+    old_name = request.form.get(Form.delete_field)
+    new_name = request.form.get(Form.rename_field)
+        
+    if not old_name or not new_name or "/" in old_name or ".." in old_name or "/" in new_name or ".." in new_name:
+        abort(400)
+    
+    # Add extension if not present
+    if not old_name.endswith('.mp4'):
+        old_name = f"{old_name}.mp4"
+    
+    renamed = replays.rename_replay(old_name, new_name)
+    if not renamed:
+        abort(500)
+        
+    return redirect(url_for(home.__name__))
+
+
 @server.route(Route.network)
 def network():
     print(cached_ssids)
@@ -199,12 +220,36 @@ def register_network():
 
 @server.after_request
 def response_minify(response):
-    if "text/html" in response.content_type:
-        minified = minify(
-            response.get_data(as_text=True),
-            minify_js=True,
-            minify_css=True,
-        )
-        response.set_data(minified)
-
     return response
+
+
+@server.template_filter('get_replay_name')
+def get_replay_name(filename):
+    """Template filter to get the custom name for a replay."""
+    name = replays.get_replay_name(filename)
+    return name
+
+
+@server.route("/video/<replay>")
+def video(replay):
+    return send_file(
+        replays.get_replays_dir() / replay,
+        mimetype="video/mp4",
+        as_attachment=True,
+        download_name=replay,
+    )
+
+
+@server.template_filter('format_datetime')
+def format_datetime(timestamp):
+    """Format timestamp into date and time on separate lines."""
+    try:
+        # Split the timestamp into date and time parts
+        date_part, time_part = timestamp.split('-')
+        # Split date into components
+        year, month, day = date_part.split('_')
+        # Format as DD.MM.YYYY
+        formatted_date = f"{day}.{month}.{year}"
+        return f"{formatted_date} {time_part}"
+    except:
+        return timestamp

@@ -5,7 +5,7 @@
 {% block replay %}
 <section>
   <h2>Replay</h2>
-  <p>{{ replay }}</p>
+  <p>{{ replay.split('.')[0] | format_datetime }}<br>{{ (replay | get_replay_name) or '' }}</p>
 
   <div class="video">
     <video controls autoplay muted>

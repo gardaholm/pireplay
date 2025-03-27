@@ -1,0 +1,25 @@
+# Development configuration for local testing
+web:
+  host: "127.0.0.1"
+  port: 5000
+  debug: true
+
+# Mock camera settings for development
+camera:
+  enabled: false
+  resolution: [1920, 1080]
+  framerate: 30
+  format: "RGB888"
+
+# Development storage settings
+storage:
+  replays_dir: "replays"
+  max_replays: 10
+  max_age_days: 7
+
+# Development network settings
+network:
+  wifi:
+    enabled: false
+    ssid: ""
+    password: "" 

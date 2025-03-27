@@ -15,15 +15,18 @@
 
 <body>
   <header>
-    <a id="theme-toggle"></a>
+    <img id="logo" src={{ url_for("static", filename="favicon.png") }}>
     <a id="app-title" href="/">PiReplay</a>
-    <a id="github" href="https://github.com/gruvw/pireplay" target="_blank">GitHub</a>
+    <a id="settings" href="{{ url_for("settings") }}">Settings</a>
   </header>
 
   <main>
     {% block content %}
     {% endblock %}
   </main>
+  <footer>
+    PiReplay – <a href="https://github.com/gruvw/pireplay">GitHub Repository</a>
+  </footer>
 
   <script>
     // Dark / Light Theme switcher
